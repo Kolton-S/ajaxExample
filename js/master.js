@@ -2,8 +2,9 @@
   // select the cars from the DOM (the web page) using the data-ref class. this creates a list of elements; it's like an array, so we can loop through them and do things like add event listeners and change classes one at a time with a forEach method (method is just another word for function)
 
   // constants are exactly what the word means - something that doesn't change. You can't change or redefine a constant once it's declared, so they're good for things that are meant to be constant throughout the runtime of an app
-  var carButtons = document.querySelectorAll('.data-ref');
+  const carButtons = document.querySelectorAll('.data-ref');
   //
+  const httpRequest = new XMLHttpRequest();
   // // the XMLHttpRequest object is a built-in part of every browser's JavaScript API. It has methods (functions) and propeties that you can run to do an AJAX request. Declaring it with round brackets at the end instantiates (creates) a new instance of the object.
   // const httpRequest = new XMLHttpRequest();
 
@@ -20,11 +21,11 @@
     const url = './includes/functions.php?carModel=' + this.id; // pass in the id from the element we're clicking on
 
     fetch(url)
-      .then((resp) => resp.json()
-      .then(data) => {processResult(data); }
-      .catch(function(error)){
+      .then((resp) => resp.json())
+      .then((data) => {processResult(data); })
+      .catch(function(error){
         console.log(error);
-      }
+      });
   }
 
   // httpRequest.onreadystatechange (on line 19) will call this 4 times. We process / monitor the status of the AJAX call. When it's done (lines 29 and 30) that means our call was successful and we have some data returned from the database to process
@@ -71,8 +72,8 @@
   // }
   //
   // // loop through and add event handling to each car thumbnail on the page. on a click, they'll fire the AJAX call at the top of the script file.
-  // carButtons.forEach(function(car, index) {
-  //   car.addEventListener('click', getCarData, false);
-  // });
+  carButtons.forEach(function(car, index) {
+    car.addEventListener('click', getCarData, false);
+  });
 
 })();
