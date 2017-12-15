@@ -1,9 +1,9 @@
-<?
+<?php
 // do the connection first, then write a query
 $user = "root";
 $pass = "root";
 $host = "localhost";
-$db = "a3_cooperInfo";
+$db = "db_cooper";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 
@@ -13,15 +13,18 @@ if (!$conn) {
 }
 
 echo 'connected, yo!';
-// 1. do a select for all of the car data
-//
-// $myQuery = "SELECT * FROM mainmodel";
-// $result = mysqli_query($conn, $myQuery);
-// $rows = array();
-//
-// while ($row = mysqli_fetch_assoc($result)) {
-//   $rows[] = $row;
-// };
+
+if (isset($_GET['getVideos'])){
+
+$myQuery = "SELECT * FROM video";
+$result = mysqli_query($conn, $myQuery);
+$rows = array();
+
+while ($row = mysqli_fetch_assoc($result)) {
+  $rows[] = $row;
+  }
+  echo json_encode($rows);
+}
 
 // echo back just the result set first
 //var_dump($rows);
